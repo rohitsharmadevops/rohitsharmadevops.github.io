@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rohit Sharma — Site Reliability Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+<style>
+  :root {
+    --bg: #0a0e1a; --bg2: #111827; --bg3: #1a2235;
+    --accent: #00d4aa; --accent2: #0ea5e9; --accent3: #f59e0b;
+    --text: #e2e8f0; --text2: #94a3b8; --text3: #64748b;
+    --border: rgba(255,255,255,0.07); --border2: rgba(0,212,170,0.3);
+    --mono: 'Space Mono', monospace; --sans: 'DM Sans', sans-serif; --radius: 12px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.7; overflow-x:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:0; opacity:0.4;
+  }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    backdrop-filter:blur(20px); background:rgba(10,14,26,0.9);
+    border-bottom:1px solid var(--border);
+    padding:0 5%; display:flex; align-items:center; justify-content:space-between; height:64px;
+  }
+  .nav-logo { font-family:var(--mono); font-size:14px; color:var(--accent); letter-spacing:0.05em; }
+  .nav-links { display:flex; gap:24px; list-style:none; align-items:center; }
+  .nav-links a { font-size:13px; color:var(--text2); text-decoration:none; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--accent); }
+  .nav-resume-btn {
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.06em;
+    color:#0a0e1a; background:var(--accent);
+    padding:7px 16px; border-radius:6px; text-decoration:none; transition:all 0.2s;
+  }
+  .nav-resume-btn:hover { background:#00f0c0; transform:translateY(-1px); }
+
+  section { position:relative; z-index:1; }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+    padding:100px 5% 60px; max-width:1100px; margin:0 auto;
+  }
+  .hero-tag {
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono); font-size:12px; color:var(--accent);
+    letter-spacing:0.08em; text-transform:uppercase;
+    border:1px solid var(--border2); padding:6px 16px; border-radius:100px;
+    margin-bottom:32px; width:fit-content; animation:fadeUp 0.6s ease both;
+  }
+  .hero-tag::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.6)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+
+  h1.hero-name {
+    font-family:var(--mono); font-size:clamp(44px,7.5vw,84px); font-weight:700;
+    line-height:1.02; letter-spacing:-0.025em; color:var(--text); margin-bottom:8px;
+    animation:fadeUp 0.6s 0.1s ease both;
+  }
+  h1.hero-name span { color:var(--accent); }
+  .hero-title {
+    font-family:var(--mono); font-size:clamp(14px,2vw,19px);
+    color:var(--text2); letter-spacing:0.04em; margin-bottom:28px;
+    animation:fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-title span { color:var(--accent2); }
+  .hero-summary {
+    max-width:640px; font-size:16px; color:var(--text2); line-height:1.85; margin-bottom:40px;
+    animation:fadeUp 0.6s 0.3s ease both;
+  }
+  .hero-summary strong { color:var(--text); font-weight:500; }
+  .hero-links { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp 0.6s 0.4s ease both; }
+
+  .btn {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 24px; border-radius:8px; font-family:var(--mono);
+    font-size:12px; font-weight:700; letter-spacing:0.05em;
+    text-decoration:none; transition:all 0.2s; cursor:pointer; border:none;
+  }
+  .btn svg { width:14px; height:14px; flex-shrink:0; }
+  .btn-primary { background:var(--accent); color:#0a0e1a; }
+  .btn-primary:hover { background:#00f0c0; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,212,170,0.3); }
+  .btn-outline { background:transparent; color:var(--text); border:1px solid var(--border); }
+  .btn-outline:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+  .btn-amber { background:transparent; color:var(--accent3); border:1px solid rgba(245,158,11,0.35); }
+  .btn-amber:hover { background:rgba(245,158,11,0.1); transform:translateY(-2px); box-shadow:0 8px 24px rgba(245,158,11,0.15); }
+
+  .hero-stats {
+    display:flex; gap:44px; flex-wrap:wrap;
+    margin-top:60px; padding-top:40px; border-top:1px solid var(--border);
+    animation:fadeUp 0.6s 0.5s ease both;
+  }
+  .stat-num { font-family:var(--mono); font-size:34px; font-weight:700; color:var(--accent); line-height:1; }
+  .stat-label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:0.09em; margin-top:5px; }
+
+  /* LAYOUT */
+  .container { max-width:1100px; margin:0 auto; padding:0 5%; }
+  .section-header { margin-bottom:52px; }
+  .section-tag {
+    font-family:var(--mono); font-size:11px; color:var(--accent);
+    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:12px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-tag::before { content:''; width:24px; height:1px; background:var(--accent); }
+  .section-title { font-family:var(--mono); font-size:clamp(26px,4vw,38px); font-weight:700; color:var(--text); letter-spacing:-0.02em; line-height:1.2; }
+
+  /* EXPERIENCE */
+  #experience { padding:110px 0; }
+  .exp-card {
+    background:var(--bg2); border:1px solid var(--border);
+    border-radius:var(--radius); padding:40px;
+    position:relative; overflow:hidden; transition:border-color 0.3s, box-shadow 0.3s;
+  }
+  .exp-card::before {
+    content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:linear-gradient(180deg,var(--accent),var(--accent2)); border-radius:3px 0 0 3px;
+  }
+  .exp-card:hover { border-color:var(--border2); box-shadow:0 0 40px rgba(0,212,170,0.06); }
+  .exp-meta { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
+  .exp-role { font-family:var(--mono); font-size:18px; font-weight:700; color:var(--text); }
+  .exp-company { font-size:14px; color:var(--accent2); margin-top:4px; font-weight:500; }
+  .exp-date {
+    font-family:var(--mono); font-size:11px; color:var(--text3);
+    background:var(--bg3); border:1px solid var(--border);
+    padding:5px 14px; border-radius:100px; white-space:nowrap;
+  }
+  .exp-bullets { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:10px 28px; }
+  @media(max-width:700px){ .exp-bullets{grid-template-columns:1fr} }
+  .exp-bullets li { font-size:13.5px; color:var(--text2); line-height:1.65; padding-left:18px; position:relative; }
+  .exp-bullets li::before { content:'▹'; position:absolute; left:0; color:var(--accent); font-size:12px; top:2px; }
+
+  /* SKILLS */
+  #skills { padding:110px 0; background:var(--bg2); }
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+  .skill-card {
+    background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:28px; transition:border-color 0.3s,transform 0.2s;
+  }
+  .skill-card:hover { border-color:var(--border2); transform:translateY(-5px); }
+  .skill-category {
+    font-family:var(--mono); font-size:11px; color:var(--accent3);
+    letter-spacing:0.1em; text-transform:uppercase; margin-bottom:18px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .skill-category::before { content:'//'; color:var(--text3); }
+  .skill-tags { display:flex; flex-wrap:wrap; gap:8px; }
+  .tag {
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:12px; font-family:var(--mono); padding:6px 12px; border-radius:7px;
+    background:var(--bg3); border:1px solid var(--border); color:var(--text2);
+    letter-spacing:0.03em; transition:all 0.2s; cursor:default;
+  }
+  .tag:hover { border-color:var(--accent2); color:var(--text); transform:translateY(-2px); }
+  .tag i[class*="devicon"] { font-size:15px; }
+  .tag svg { width:14px; height:14px; flex-shrink:0; }
+  /* Brand colours on hover reveal */
+  .tag:hover i.devicon-docker-plain      { color:#2496ed; }
+  .tag:hover i.devicon-kubernetes-plain  { color:#326ce5; }
+  .tag:hover i.devicon-amazonwebservices-original { color:#ff9900; }
+  .tag:hover i.devicon-azure-plain       { color:#0089d6; }
+  .tag:hover i.devicon-terraform-plain   { color:#7b42bc; }
+  .tag:hover i.devicon-jenkins-plain     { color:#d24939; }
+  .tag:hover i.devicon-grafana-original  { color:#f46800; }
+  .tag:hover i.devicon-linux-plain       { color:#fcc624; }
+  .tag:hover i.devicon-mysql-plain       { color:#4479a1; }
+  .tag:hover i.devicon-bash-plain        { color:#4eaa25; }
+  .tag:hover i.devicon-powershell-plain  { color:#5391fe; }
+  .tag:hover i.devicon-git-plain         { color:#f05032; }
+  .tag:hover i.devicon-prometheus-original { color:#e6522c; }
+  .tag:hover i.devicon-linkedin-plain    { color:#0a66c2; }
+  /* always-on subtle tint */
+  .tag i.devicon-docker-plain { color:rgba(36,150,237,0.7); }
+  .tag i.devicon-kubernetes-plain { color:rgba(50,108,229,0.7); }
+  .tag i.devicon-amazonwebservices-original { color:rgba(255,153,0,0.7); }
+  .tag i.devicon-azure-plain { color:rgba(0,137,214,0.7); }
+  .tag i.devicon-terraform-plain { color:rgba(123,66,188,0.7); }
+  .tag i.devicon-jenkins-plain { color:rgba(210,73,57,0.7); }
+  .tag i.devicon-grafana-original { color:rgba(244,104,0,0.7); }
+  .tag i.devicon-linux-plain { color:rgba(252,198,36,0.7); }
+  .tag i.devicon-mysql-plain { color:rgba(68,121,161,0.7); }
+  .tag i.devicon-bash-plain { color:rgba(78,170,37,0.7); }
+  .tag i.devicon-powershell-plain { color:rgba(83,145,254,0.7); }
+  .tag i.devicon-git-plain { color:rgba(240,80,50,0.7); }
+  .tag i.devicon-prometheus-original { color:rgba(230,82,44,0.7); }
+
+  /* ACHIEVEMENTS */
+  #achievements { padding:110px 0; }
+  .ach-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+  .ach-card {
+    background:var(--bg2); border:1px solid var(--border);
+    border-radius:var(--radius); padding:32px; transition:border-color 0.3s,transform 0.2s;
+  }
+  .ach-card:hover { border-color:rgba(245,158,11,0.4); transform:translateY(-4px); }
+  .ach-icon { font-size:32px; margin-bottom:18px; display:block; }
+  .ach-card h3 { font-family:var(--mono); font-size:12px; font-weight:700; color:var(--accent3); margin-bottom:10px; letter-spacing:0.05em; text-transform:uppercase; }
+  .ach-card p { font-size:14px; color:var(--text2); line-height:1.75; }
+
+  /* RESUME BANNER */
+  .resume-banner {
+    margin-top:60px;
+    background:linear-gradient(135deg,rgba(0,212,170,0.06) 0%,rgba(14,165,233,0.06) 100%);
+    border:1px solid var(--border2); border-radius:var(--radius);
+    padding:36px 40px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .resume-banner-text h3 { font-family:var(--mono); font-size:16px; color:var(--text); margin-bottom:6px; display:flex; align-items:center; gap:10px; }
+  .resume-banner-text p { font-size:13px; color:var(--text2); }
+  @media(max-width:600px){ .resume-banner{flex-direction:column;text-align:center;} }
+
+  /* EDUCATION */
+  #education { padding:110px 0; background:var(--bg2); }
+  .edu-card {
+    background:var(--bg); border:1px solid var(--border);
+    border-radius:var(--radius); padding:40px;
+    display:flex; align-items:flex-start; gap:28px; flex-wrap:wrap;
+  }
+  .edu-badge {
+    width:64px; height:64px; border-radius:16px;
+    background:var(--bg3); border:1px solid var(--border2);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:22px; font-weight:700; color:var(--accent); flex-shrink:0;
+  }
+  .edu-info h3 { font-family:var(--mono); font-size:18px; color:var(--text); margin-bottom:6px; }
+  .edu-info p { font-size:14px; color:var(--text2); }
+  .edu-info .grade { color:var(--accent); font-weight:600; }
+
+  /* CONTACT */
+  #contact { padding:110px 0; }
+  .contact-inner {
+    background:var(--bg2); border:1px solid var(--border);
+    border-radius:20px; padding:64px 52px; text-align:center; position:relative; overflow:hidden;
+  }
+  .contact-inner::before {
+    content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:320px; height:2px;
+    background:linear-gradient(90deg,transparent,var(--accent),var(--accent2),transparent);
+  }
+  .contact-title { font-family:var(--mono); font-size:clamp(28px,5vw,52px); font-weight:700; color:var(--text); margin-bottom:16px; line-height:1.1; }
+  .contact-sub { font-size:16px; color:var(--text2); max-width:500px; margin:0 auto 44px; }
+  .contact-links { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:24px; }
+  .contact-item {
+    display:flex; align-items:center; gap:9px;
+    font-family:var(--mono); font-size:12px; color:var(--text2);
+    background:var(--bg3); border:1px solid var(--border);
+    padding:11px 20px; border-radius:8px; text-decoration:none; transition:all 0.2s;
+  }
+  .contact-item:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+  .contact-item svg { width:14px; height:14px; flex-shrink:0; }
+  .contact-item i { font-size:16px; }
+
+  footer {
+    border-top:1px solid var(--border); padding:28px 5%;
+    text-align:center; font-family:var(--mono); font-size:11px; color:var(--text3); letter-spacing:0.06em;
+  }
+  ::-webkit-scrollbar{width:4px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
+  .reveal { opacity:0; transform:translateY(26px); transition:opacity 0.65s ease,transform 0.65s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  @media(max-width:600px){
+    nav .nav-links { display:none; }
+    .hero-stats{gap:24px} .contact-inner{padding:40px 24px} .exp-card{padding:24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <span class="nav-logo">RS.sre</span>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li>
+      <a href="#" onclick="downloadResume();return false;" class="nav-resume-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Resume
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div style="max-width:1100px;margin:0 auto;padding:0 5%">
+<section id="hero">
+  <div class="hero-tag">Available for new opportunities</div>
+  <h1 class="hero-name">Rohit<br><span>Sharma.</span></h1>
+  <p class="hero-title">// <span>Site Reliability Engineer</span></p>
+  <p class="hero-summary">
+    SRE with <strong>2.5 years of experience</strong> specializing in
+    <strong>cloud infrastructure, automation &amp; system optimization</strong>.
+    Proven track record designing, optimizing and securing large-scale infrastructure —
+    focused on high availability, incident response and cost-efficient platforms.
+  </p>
+  <div class="hero-links">
+    <a href="#contact" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Get In Touch
+    </a>
+    <a href="#experience" class="btn btn-outline">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      View Experience
+    </a>
+    <a href="#" onclick="downloadResume();return false;" class="btn btn-amber">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Resume
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">2.5</div><div class="stat-label">Years Experience</div></div>
+    <div><div class="stat-num">2</div><div class="stat-label">Cloud Platforms</div></div>
+    <div><div class="stat-num">10+</div><div class="stat-label">Tools Mastered</div></div>
+    <div><div class="stat-num">★</div><div class="stat-label">Star of Quarter</div></div>
+  </div>
+</section>
+</div>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Work History</div>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-meta">
+        <div>
+          <div class="exp-role">Operations Support Engineer / SRE</div>
+          <div class="exp-company">Contango Services Private Limited — Bengaluru / Remote</div>
+        </div>
+        <div class="exp-date">Feb 2024 – Present</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Centralized logging &amp; monitoring using Grafana, Loki and Promtail, improving observability and incident response</li>
+        <li>Automated operational tasks by integrating PowerShell scripting with Jenkins, reducing manual intervention</li>
+        <li>Managed AWS resources — EC2, S3, VPC, IAM — ensuring scalability, reliability and security</li>
+        <li>Implemented Infrastructure as Code (IaC) solutions using Terraform</li>
+        <li>Monitored Windows &amp; Linux servers remotely; proficient in KQL for log analytics</li>
+        <li>Conducted performance tuning for cloud apps using AWS CloudWatch and Grafana</li>
+        <li>Resolved critical infrastructure issues ensuring high availability for business-critical apps</li>
+        <li>Participated in incident management: troubleshooting, root cause analysis, post-mortems</li>
+        <li>Troubleshot data mismatch issues using Unix commands and MySQL queries</li>
+        <li>Managed containerized environments using Docker and Kubernetes</li>
+        <li>Participated in Agile Sprints and led fortnightly retrospectives</li>
+        <li>On-call rotation for planned and unplanned events; maintained SLA/SLO/SLI metrics</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Technical Stack</div>
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-grid">
+
+      <!-- Monitoring & Logging -->
+      <div class="skill-card reveal">
+        <div class="skill-category">Monitoring &amp; Logging</div>
+        <div class="skill-tags">
+          <span class="tag"><i class="devicon-grafana-original"></i>Grafana</span>
+          <span class="tag"><i class="devicon-prometheus-original"></i>Loki</span>
+          <span class="tag">
+            <!-- Promtail — custom icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(230,82,44,0.7)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            Promtail
+          </span>
+          <span class="tag">
+            <!-- CloudWatch -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,153,0,0.7)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            CloudWatch
+          </span>
+          <span class="tag">
+            <!-- PRTG -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(0,212,170,0.7)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>
+            PRTG
+          </span>
+          <span class="tag">
+            <!-- KQL -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(148,163,184,0.7)" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+            KQL
+          </span>
+        </div>
+      </div>
+
+      <!-- Cloud & Infrastructure -->
+      <div class="skill-card reveal">
+        <div class="skill-category">Cloud &amp; Infrastructure</div>
+        <div class="skill-tags">
+          <span class="tag"><i class="devicon-amazonwebservices-original"></i>AWS</span>
+          <span class="tag"><i class="devicon-azure-plain"></i>Azure</span>
+          <span class="tag"><i class="devicon-terraform-plain"></i>Terraform</span>
+          <span class="tag">
+            <!-- EC2 -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,153,0,0.7)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+            EC2
+          </span>
+          <span class="tag">
+            <!-- S3 -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,153,0,0.7)" stroke-width="2"><ellipse cx="12" cy="7" rx="9" ry="4"/><path d="M3 7v5c0 2.21 4.03 4 9 4s9-1.79 9-4V7"/><path d="M3 12v5c0 2.21 4.03 4 9 4s9-1.79 9-4v-5"/></svg>
+            S3
+          </span>
+          <span class="tag">
+            <!-- VPC -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,0.7)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M2 12h20M12 2v20"/></svg>
+            VPC
+          </span>
+          <span class="tag">
+            <!-- IAM -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,0.7)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            IAM
+          </span>
+        </div>
+      </div>
+
+      <!-- DevOps & Tools -->
+      <div class="skill-card reveal">
+        <div class="skill-category">DevOps &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="tag"><i class="devicon-docker-plain"></i>Docker</span>
+          <span class="tag"><i class="devicon-kubernetes-plain"></i>Kubernetes</span>
+          <span class="tag"><i class="devicon-jenkins-plain"></i>Jenkins</span>
+          <span class="tag"><i class="devicon-linux-plain"></i>Linux</span>
+          <span class="tag"><i class="devicon-git-plain"></i>Git</span>
+          <span class="tag">
+            <!-- Azure DevOps -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(0,137,214,0.7)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Azure DevOps
+          </span>
+          <span class="tag">
+            <!-- Confluence -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(14,165,233,0.7)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Confluence
+          </span>
+        </div>
+      </div>
+
+      <!-- Programming & Databases -->
+      <div class="skill-card reveal">
+        <div class="skill-category">Programming &amp; Databases</div>
+        <div class="skill-tags">
+          <span class="tag"><i class="devicon-bash-plain"></i>Shell Script</span>
+          <span class="tag"><i class="devicon-powershell-plain"></i>PowerShell</span>
+          <span class="tag"><i class="devicon-mysql-plain"></i>MySQL</span>
+          <span class="tag">
+            <!-- SQL Server -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(204,41,39,0.7)" stroke-width="2"><ellipse cx="12" cy="6" rx="9" ry="3"/><path d="M3 6v6c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/><path d="M3 12v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/></svg>
+            SQL Server
+          </span>
+          <span class="tag">
+            <!-- Oracle -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(248,0,0,0.7)" stroke-width="2"><ellipse cx="12" cy="12" rx="10" ry="5"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+            Oracle SQL
+          </span>
+          <span class="tag">
+            <!-- DNS/Network -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(148,163,184,0.7)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            DNS/HTTP/SSH
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACHIEVEMENTS ═══ -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Recognition</div>
+      <h2 class="section-title">Achievements</h2>
+    </div>
+    <div class="ach-grid">
+      <div class="ach-card reveal">
+        <span class="ach-icon">🏆</span>
+        <h3>Star of the Quarter</h3>
+        <p>Recognized for consistently demonstrating outstanding dedication, initiative and excellence in delivering results beyond expectations.</p>
+      </div>
+      <div class="ach-card reveal">
+        <span class="ach-icon">⚡</span>
+        <h3>Top Incident Resolver</h3>
+        <p>Resolved the highest number of incidents over three consecutive quarters, consistently exceeding all performance benchmarks.</p>
+      </div>
+    </div>
+
+    <!-- Resume Download Banner -->
+    <div class="resume-banner reveal">
+      <div class="resume-banner-text">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Want the full resume?
+        </h3>
+        <p>Download a complete text copy of my resume, ready for job applications.</p>
+      </div>
+      <a href="#" onclick="downloadResume();return false;" class="btn btn-amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EDUCATION ═══ -->
+<section id="education">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Academic Background</div>
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-badge">B</div>
+      <div class="edu-info">
+        <h3>JSS Academy of Technical Education, Noida</h3>
+        <p>Bachelor of Technology</p>
+        <p style="margin-top:8px">Aggregate: <span class="grade">75.30%</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner reveal">
+      <p class="section-tag" style="justify-content:center;margin-bottom:16px">Open to Work</p>
+      <h2 class="contact-title">Let's Build<br>Something Reliable.</h2>
+      <p class="contact-sub">Looking for SRE, DevOps or Cloud Infrastructure roles. Open to remote and hybrid opportunities.</p>
+      <a href="mailto:rohitsharmajss21@gmail.com" class="btn btn-primary" style="margin:0 auto 36px;display:inline-flex">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        rohitsharmajss21@gmail.com
+      </a>
+      <div class="contact-links">
+        <a href="tel:+918439576711" class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.22A2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.13 1 .38 1.98.74 2.92a2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.92.74A2 2 0 0 1 22 16.92z"/></svg>
+          +91-8439576711
+        </a>
+        <a href="https://www.linkedin.com/in/rohit-sharma-8b2518304" target="_blank" rel="noopener" class="contact-item">
+          <i class="devicon-linkedin-plain" style="color:rgba(10,102,194,0.8)"></i>
+          LinkedIn
+        </a>
+        <a href="mailto:rohitsharmajss21@gmail.com" class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+        <a href="#" onclick="downloadResume();return false;" class="contact-item" style="border-color:rgba(245,158,11,0.35);color:var(--accent3)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>Rohit Sharma &nbsp;·&nbsp; Site Reliability Engineer &nbsp;·&nbsp; Bengaluru, India</div>
+</footer>
+
+<script>
+/* ─── Scroll reveal ─── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold:0.08, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach((el,i) => {
+  el.style.transitionDelay = (i%4)*0.09+'s';
+  obs.observe(el);
+});
+
+/* ─── Resume download ─── */
+function downloadResume() {
+  const txt = `ROHIT SHARMA
+Site Reliability Engineer
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Phone   : +91-8439576711
+Email   : rohitsharmajss21@gmail.com
+LinkedIn: linkedin.com/in/rohit-sharma-8b2518304
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Site Reliability Engineer with 2.5 years of experience specializing in cloud
+infrastructure, automation, and system optimization. Proven track record of
+designing, optimizing, and securing large-scale infrastructure solutions. Skilled
+in incident management, disaster recovery, automation, and collaborating with
+cross-functional teams to deliver highly available, secure, and cost-efficient
+platforms.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXPERIENCE  (2 years 5 months)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Operations Support Engineer / SRE
+Contango Services Private Limited — Bengaluru / Remote
+Feb 2024 – Present
+
+• Implemented centralized logging and monitoring using Grafana, Loki, and Promtail,
+  improving observability and incident response.
+• Automated operational tasks by integrating PowerShell scripting with Jenkins,
+  enhancing system efficiency and reducing manual intervention.
+• Managed AWS resources including EC2, S3, VPC, and IAM policies.
+• Implemented Infrastructure as Code (IaC) solutions using Terraform.
+• Monitored Windows and Linux servers remotely; proficient in KQL.
+• Conducted performance monitoring and tuning using AWS CloudWatch and Grafana.
+• Resolved critical infrastructure issues ensuring high availability.
+• Participated in incident management: troubleshooting, RCA, and post-mortems.
+• Troubleshot data mismatch issues using Unix commands and MySQL queries.
+• Managed containerized environments using Docker and Kubernetes.
+• Participated in Agile Sprints and led fortnightly retrospectives.
+• On-call rotation for planned and unplanned events; maintained SLA/SLO/SLI metrics.
+• Understanding of common network protocols: DNS, HTTP(S), SSH, FTP.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EDUCATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+JSS Academy of Technical Education, Noida
+Bachelor of Technology
+Aggregate: 75.30%
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SKILLS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Monitoring & Logging   : PRTG, AWS CloudWatch, Grafana, Loki, Promtail
+Cloud & Infrastructure : AWS, Azure, Terraform, EC2, S3, VPC, IAM
+DevOps & Tools         : Docker, Kubernetes, Jenkins, Linux, Git, Azure DevOps, Confluence
+Programming & DB       : Shell Scripting, PowerShell, MySQL, SQL Server, Oracle SQL
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ACHIEVEMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Star of the Quarter Award — recognized for outstanding dedication and excellence.
+• Top Incident Resolver — highest incidents resolved across three consecutive quarters.
+`;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([txt],{type:'text/plain'}));
+  a.download = 'Rohit_Sharma_SRE_Resume.txt';
+  a.click();
+}
+</script>
+</body>
+</html>

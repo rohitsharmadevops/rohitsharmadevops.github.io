@@ -280,7 +280,7 @@
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
     <li>
-      <a href="#" onclick="downloadResume();return false;" class="nav-resume-btn">
+      <a href="resume.pdf" download="Rohit_Sharma_SRE_Resume.pdf" class="nav-resume-btn">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Resume
       </a>
@@ -309,7 +309,7 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
       View Experience
     </a>
-    <a href="#" onclick="downloadResume();return false;" class="btn btn-amber">
+    <a href="resume.pdf" download="Rohit_Sharma_SRE_Resume.pdf" class="btn btn-amber">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Download Resume
     </a>
@@ -504,7 +504,7 @@
         </h3>
         <p>Download a complete text copy of my resume, ready for job applications.</p>
       </div>
-      <a href="#" onclick="downloadResume();return false;" class="btn btn-amber">
+      <a href="resume.pdf" download="Rohit_Sharma_SRE_Resume.pdf" class="btn btn-amber">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Download Resume
       </a>
@@ -554,7 +554,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Email
         </a>
-        <a href="#" onclick="downloadResume();return false;" class="contact-item" style="border-color:rgba(245,158,11,0.35);color:var(--accent3)">
+        <a href="resume.pdf" download="Rohit_Sharma_SRE_Resume.pdf" class="contact-item" style="border-color:rgba(245,158,11,0.35);color:var(--accent3)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Resume
         </a>
@@ -576,75 +576,3 @@ document.querySelectorAll('.reveal').forEach((el,i) => {
   el.style.transitionDelay = (i%4)*0.09+'s';
   obs.observe(el);
 });
-
-/* ─── Resume download ─── */
-function downloadResume() {
-  const txt = `ROHIT SHARMA
-Site Reliability Engineer
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Phone   : +91-8439576711
-Email   : rohitsharmajss21@gmail.com
-LinkedIn: linkedin.com/in/rohit-sharma-8b2518304
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SUMMARY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Site Reliability Engineer with 2.5 years of experience specializing in cloud
-infrastructure, automation, and system optimization. Proven track record of
-designing, optimizing, and securing large-scale infrastructure solutions. Skilled
-in incident management, disaster recovery, automation, and collaborating with
-cross-functional teams to deliver highly available, secure, and cost-efficient
-platforms.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EXPERIENCE  (2 years 5 months)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Operations Support Engineer / SRE
-Contango Services Private Limited — Bengaluru / Remote
-Feb 2024 – Present
-
-• Implemented centralized logging and monitoring using Grafana, Loki, and Promtail,
-  improving observability and incident response.
-• Automated operational tasks by integrating PowerShell scripting with Jenkins,
-  enhancing system efficiency and reducing manual intervention.
-• Managed AWS resources including EC2, S3, VPC, and IAM policies.
-• Implemented Infrastructure as Code (IaC) solutions using Terraform.
-• Monitored Windows and Linux servers remotely; proficient in KQL.
-• Conducted performance monitoring and tuning using AWS CloudWatch and Grafana.
-• Resolved critical infrastructure issues ensuring high availability.
-• Participated in incident management: troubleshooting, RCA, and post-mortems.
-• Troubleshot data mismatch issues using Unix commands and MySQL queries.
-• Managed containerized environments using Docker and Kubernetes.
-• Participated in Agile Sprints and led fortnightly retrospectives.
-• On-call rotation for planned and unplanned events; maintained SLA/SLO/SLI metrics.
-• Understanding of common network protocols: DNS, HTTP(S), SSH, FTP.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EDUCATION
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-JSS Academy of Technical Education, Noida
-Bachelor of Technology
-Aggregate: 75.30%
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SKILLS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Monitoring & Logging   : PRTG, AWS CloudWatch, Grafana, Loki, Promtail
-Cloud & Infrastructure : AWS, Azure, Terraform, EC2, S3, VPC, IAM
-DevOps & Tools         : Docker, Kubernetes, Jenkins, Linux, Git, Azure DevOps, Confluence
-Programming & DB       : Shell Scripting, PowerShell, MySQL, SQL Server, Oracle SQL
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ACHIEVEMENTS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Star of the Quarter Award — recognized for outstanding dedication and excellence.
-• Top Incident Resolver — highest incidents resolved across three consecutive quarters.
-`;
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([txt],{type:'text/plain'}));
-  a.download = 'Rohit_Sharma_SRE_Resume.txt';
-  a.click();
-}
-</script>
-</body>
-</html>
